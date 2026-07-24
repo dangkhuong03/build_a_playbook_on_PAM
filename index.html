@@ -128,7 +128,7 @@
     section { margin: 0 0 92px; scroll-margin-top: 26px; }
     .hero {
       position: relative; overflow: hidden; padding: 68px; min-height: 620px; display: flex; flex-direction: column; justify-content: space-between;
-      background: var(--ink); color: #fff; border-radius: 32px; box-shadow: var(--shadow-lg);
+      background:#0d6e4c; color: #fff; border-radius: 32px; box-shadow: var(--shadow-lg);
     }
     .hero::before {
       content: ""; position: absolute; width: 620px; height: 620px; right: -240px; top: -270px; border-radius: 50%;
@@ -296,7 +296,7 @@
     .feature-card svg { width: 22px; height: 22px; color: var(--accent); margin-bottom: 22px; }
     .conclusion {
       overflow: hidden; position: relative; padding: 54px; border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, var(--ink), color-mix(in srgb, var(--ink) 76%, #187a64)); color: #fff; box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, #0d6e4c, #0a5a3e); color: #fff; box-shadow: var(--shadow-lg);
     }
     .conclusion h2 { max-width: 700px; font-size: clamp(32px, 4vw, 48px); }
     .conclusion p { max-width: 750px; color: #c9dad5; font-size: 17px; }
@@ -395,9 +395,7 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
         <div style="display:flex; gap:8px">
-          <button class="icon-button" id="printButton" aria-label="Print report" title="Print report">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M7 8V4h10v4M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v6H7v-6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-          </button>
+
           <button class="icon-button" id="themeButton" aria-label="Switch to dark mode" title="Toggle dark mode">
             <svg class="moon" viewBox="0 0 24 24" fill="none"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" stroke="currentColor" stroke-width="1.7"/></svg>
           </button>
@@ -744,7 +742,6 @@ flowchart LR
       }
       setTheme(savedTheme || (preferredDark ? 'dark' : 'light'));
       themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
-      document.getElementById('printButton').addEventListener('click', () => window.print());
 
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('overlay');
