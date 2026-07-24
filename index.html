@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Enterprise product review of a reusable PAM playbook for seasonal hospitality performance advertising.">
+  <title>PAM Playbook — Seasonal Hospitality Performance Ads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #f5f7f7;
+      --surface: #ffffff;
+      --surface-2: #f8faf9;
+      --surface-3: #eef3f1;
+      --text: #16231f;
+      --muted: #64736d;
+      --muted-2: #8b9893;
+      --border: #dfe7e4;
+      --border-strong: #cbd8d3;
+      --ink: #123f35;
+      --accent: #0b7a61;
+      --accent-2: #d8f4ea;
+      --gold: #ad7b29;
+      --gold-soft: #f7ecd7;
+      --blue: #2666c0;
+      --blue-soft: #e6eefb;
+      --danger: #b8483e;
+      --shadow-sm: 0 1px 2px rgba(24, 53, 44, .05), 0 4px 14px rgba(24, 53, 44, .04);
+      --shadow-lg: 0 22px 70px rgba(22, 52, 43, .11);
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --sidebar: 270px;
+      --content: 1120px;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1513;
+      --surface: #131e1b;
+      --surface-2: #172521;
+      --surface-3: #20312c;
+      --text: #edf4f1;
+      --muted: #a1b2ac;
+      --muted-2: #7f928b;
+      --border: #283a34;
+      --border-strong: #3b5149;
+      --ink: #e2f6ef;
+      --accent: #55d3ad;
+      --accent-2: #193f34;
+      --gold: #e3b969;
+      --gold-soft: #40341e;
+      --blue: #83b2f1;
+      --blue-soft: #1e3656;
+      --danger: #f18b80;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, .2), 0 4px 14px rgba(0, 0, 0, .18);
+      --shadow-lg: 0 24px 72px rgba(0, 0, 0, .28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 90% 5%, rgba(48, 177, 139, .08), transparent 28rem),
+        radial-gradient(circle at 8% 38%, rgba(211, 171, 88, .06), transparent 24rem);
+      pointer-events: none;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    img { max-width: 100%; }
+    .skip-link {
+      position: fixed; left: 16px; top: -60px; z-index: 100;
+      padding: 10px 14px; border-radius: 8px; background: var(--text); color: var(--surface);
+    }
+    .skip-link:focus { top: 14px; }
+    .layout { display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); min-height: 100vh; }
+    .sidebar {
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+      padding: 28px 20px 22px; background: color-mix(in srgb, var(--surface) 92%, transparent);
+      border-right: 1px solid var(--border); backdrop-filter: blur(16px); z-index: 20;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 0 8px 22px; border-bottom: 1px solid var(--border); }
+    .brand-mark {
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px;
+      background: var(--ink); color: var(--surface); box-shadow: var(--shadow-sm);
+    }
+    .brand-mark svg { width: 19px; }
+    .brand strong { display: block; font-family: Manrope, sans-serif; font-size: 14px; letter-spacing: -.02em; }
+    .brand span { display: block; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+    nav { padding: 20px 0; }
+    .nav-label { margin: 0 10px 8px; color: var(--muted-2); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-link {
+      position: relative; display: flex; align-items: center; gap: 10px; min-height: 36px;
+      padding: 7px 10px; border-radius: 9px; color: var(--muted); text-decoration: none; font-size: 13px;
+      transition: .2s ease;
+    }
+    .nav-link::before { content: ""; width: 5px; height: 5px; border: 1px solid currentColor; border-radius: 50%; }
+    .nav-link:hover { color: var(--text); background: var(--surface-2); }
+    .nav-link.active { color: var(--accent); background: var(--accent-2); font-weight: 600; }
+    .nav-link.active::before { background: var(--accent); border-color: var(--accent); }
+    .sidebar-foot { margin-top: 8px; padding: 16px 10px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; }
+    .page { min-width: 0; }
+    .topbar {
+      position: sticky; top: 0; z-index: 15; display: flex; justify-content: flex-end; align-items: center; gap: 8px;
+      height: 64px; padding: 0 28px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(14px);
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 62%, transparent);
+    }
+    .icon-button, .menu-button {
+      display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--border);
+      border-radius: 10px; background: var(--surface); color: var(--text); cursor: pointer; box-shadow: var(--shadow-sm);
+    }
+    .icon-button:hover, .menu-button:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .icon-button svg, .menu-button svg { width: 18px; height: 18px; }
+    .menu-button { display: none; }
+    main { max-width: calc(var(--content) + 96px); margin: 0 auto; padding: 42px 48px 110px; }
+    section { margin: 0 0 92px; scroll-margin-top: 26px; }
+    .hero {
+      position: relative; overflow: hidden; padding: 68px; min-height: 620px; display: flex; flex-direction: column; justify-content: space-between;
+      background: var(--ink); color: #fff; border-radius: 32px; box-shadow: var(--shadow-lg);
+    }
+    .hero::before {
+      content: ""; position: absolute; width: 620px; height: 620px; right: -240px; top: -270px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.14); box-shadow: 0 0 0 70px rgba(255,255,255,.025), 0 0 0 150px rgba(255,255,255,.018);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 34%; opacity: .16;
+      background: linear-gradient(120deg, transparent 10%, rgba(119, 225, 190, .65)), repeating-linear-gradient(90deg, transparent 0 62px, rgba(255,255,255,.12) 63px);
+      clip-path: polygon(0 55%, 15% 32%, 30% 62%, 47% 16%, 63% 58%, 78% 28%, 100% 66%, 100% 100%, 0 100%);
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin: 0 0 20px;
+      color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase;
+    }
+    .hero .eyebrow { color: #95e0c8; }
+    .eyebrow::before { content: ""; width: 20px; height: 1px; background: currentColor; }
+    h1, h2, h3, h4 { font-family: Manrope, sans-serif; line-height: 1.16; margin: 0; letter-spacing: -.035em; }
+    h1 { max-width: 820px; font-size: clamp(46px, 6vw, 76px); font-weight: 700; }
+    .hero-sub { max-width: 650px; margin: 24px 0 0; color: #c6d9d3; font-size: 20px; line-height: 1.55; }
+    .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 60px; }
+    .hero-meta div { padding-top: 14px; border-top: 1px solid rgba(255,255,255,.2); }
+    .hero-meta span { display: block; color: #91aaa2; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-meta strong { display: block; margin-top: 4px; color: #fff; font-size: 13px; font-weight: 600; }
+    .section-head { display: grid; grid-template-columns: 1fr minmax(280px, 430px); gap: 50px; align-items: end; margin-bottom: 34px; }
+    .section-head h2 { font-size: clamp(34px, 4vw, 48px); }
+    .section-head p { margin: 0; color: var(--muted); }
+    .lead { max-width: 800px; color: var(--muted); font-size: 18px; }
+    .grid-2, .grid-3, .grid-4 { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      position: relative; padding: 26px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    }
+    .card h3 { font-size: 18px; }
+    .card p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+    .card .kicker { display: block; margin-bottom: 20px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .stat { padding: 28px; }
+    .stat strong { display: block; color: var(--ink); font-family: Manrope; font-size: 38px; line-height: 1; }
+    .stat span { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; }
+    .check-card { display: flex; gap: 16px; align-items: flex-start; }
+    .check {
+      flex: 0 0 32px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent-2); color: var(--accent); font-weight: 800;
+    }
+    .callout {
+      display: flex; align-items: flex-start; gap: 18px; margin-top: 22px; padding: 24px 26px;
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: var(--radius);
+      background: color-mix(in srgb, var(--accent-2) 58%, var(--surface));
+    }
+    .callout strong { display: block; margin-bottom: 4px; font-family: Manrope; }
+    .callout p { margin: 0; color: var(--muted); font-size: 14px; }
+    .callout-mark { font-family: Manrope; color: var(--accent); font-weight: 800; }
+    .diagram {
+      overflow-x: auto; padding: 34px 18px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    }
+    .diagram .mermaid { min-width: 840px; display: flex; justify-content: center; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 14px; }
+    th { padding: 14px 18px; color: var(--muted); background: var(--surface-2); border-bottom: 1px solid var(--border); text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+    td { padding: 17px 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { font-weight: 600; color: var(--text); }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px; padding: 5px 9px; border-radius: 999px;
+      background: var(--surface-3); color: var(--muted); font-size: 11px; font-weight: 700; white-space: nowrap;
+    }
+    .badge.required { color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, var(--surface)); }
+    .badge.pass { color: var(--accent); background: var(--accent-2); }
+    .badge.gold { color: var(--gold); background: var(--gold-soft); }
+    .input-card { min-height: 180px; }
+    .input-card .number { position: absolute; right: 22px; top: 19px; color: var(--border-strong); font-family: Manrope; font-size: 24px; font-weight: 800; }
+    .mini-list { margin: 14px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+    .mini-list li { padding: 5px 0; }
+    .mini-list li::before { content: "—"; margin-right: 8px; color: var(--accent); }
+    .workflow-list { display: grid; gap: 16px; position: relative; }
+    .stage {
+      display: grid; grid-template-columns: 60px minmax(180px, .7fr) 1.8fr; gap: 24px; padding: 26px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    }
+    .stage-num {
+      display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px;
+      color: var(--accent); background: var(--accent-2); font-family: Manrope; font-weight: 800;
+    }
+    .stage-title h3 { font-size: 19px; }
+    .stage-title p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
+    .stage-detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px 26px; }
+    .stage-detail div { color: var(--muted); font-size: 13px; }
+    .stage-detail strong { display: block; margin-bottom: 3px; color: var(--text); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+    .output-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; counter-reset: out; }
+    .output-item { position: relative; padding: 22px 20px 22px 56px; border-bottom: 1px solid var(--border); counter-increment: out; }
+    .output-item::before {
+      content: counter(out, decimal-leading-zero); position: absolute; left: 0; top: 23px; color: var(--accent);
+      font-family: Manrope; font-size: 12px; font-weight: 800;
+    }
+    .output-item h3 { font-size: 16px; }
+    .output-item p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+    pre {
+      margin: 24px 0 0; overflow-x: auto; padding: 24px; border: 1px solid var(--border);
+      border-radius: var(--radius); background: #10201c; color: #dce9e5; font: 13px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace;
+      box-shadow: var(--shadow-sm);
+    }
+    .qa-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 20px; }
+    .qa-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .qa-row { display: flex; justify-content: space-between; gap: 14px; padding: 13px 14px; background: var(--surface-2); border-radius: 10px; font-size: 13px; }
+    .qa-row strong { color: var(--accent); }
+    .threshold { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 15px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .threshold:last-child { border: 0; }
+    .threshold p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .threshold-score { font-family: Manrope; font-size: 17px; font-weight: 800; }
+    .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+    .creative-card { overflow: hidden; padding: 0; }
+    .creative-media { position: relative; overflow: hidden; background: var(--surface-3); aspect-ratio: 4 / 5; }
+    .creative-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .45s ease; }
+    .creative-card:hover img { transform: scale(1.018); }
+    .creative-body { padding: 22px; }
+    .creative-body h3 { font-size: 18px; }
+    .creative-body p { margin: 7px 0 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 22px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--border); }
+    .proof-strip div { padding: 18px; background: var(--surface); text-align: center; }
+    .proof-strip strong { display: block; color: var(--accent); font-family: Manrope; font-size: 21px; }
+    .proof-strip span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+    .feature-card svg { width: 22px; height: 22px; color: var(--accent); margin-bottom: 22px; }
+    .conclusion {
+      overflow: hidden; position: relative; padding: 54px; border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--ink), color-mix(in srgb, var(--ink) 76%, #187a64)); color: #fff; box-shadow: var(--shadow-lg);
+    }
+    .conclusion h2 { max-width: 700px; font-size: clamp(32px, 4vw, 48px); }
+    .conclusion p { max-width: 750px; color: #c9dad5; font-size: 17px; }
+    .conclusion .badge { color: #b7ead9; background: rgba(255,255,255,.1); }
+    .back-top {
+      position: fixed; right: 24px; bottom: 24px; z-index: 20; display: grid; place-items: center;
+      width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); color: var(--text);
+      box-shadow: var(--shadow-lg); cursor: pointer; opacity: 0; transform: translateY(12px); pointer-events: none; transition: .2s;
+    }
+    .back-top.visible { opacity: 1; transform: none; pointer-events: auto; }
+    .back-top svg { width: 18px; }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .mobile-overlay { display: none; }
+    @media (max-width: 1050px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: fixed; left: 0; transform: translateX(-100%); width: 280px; transition: transform .25s ease; box-shadow: var(--shadow-lg); }
+      .sidebar.open { transform: none; }
+      .mobile-overlay { position: fixed; inset: 0; z-index: 18; background: rgba(4,15,12,.36); backdrop-filter: blur(2px); }
+      .mobile-overlay.show { display: block; }
+      .topbar { justify-content: space-between; }
+      .menu-button { display: inline-grid; }
+      main { padding-top: 30px; }
+    }
+    @media (max-width: 760px) {
+      main { padding: 24px 18px 90px; }
+      section { margin-bottom: 68px; }
+      .hero { padding: 36px 26px; min-height: 620px; border-radius: 22px; }
+      .hero-meta { grid-template-columns: 1fr; gap: 12px; margin-top: 42px; }
+      .section-head { grid-template-columns: 1fr; gap: 14px; }
+      .grid-2, .grid-3, .grid-4, .evidence-grid, .qa-layout { grid-template-columns: 1fr; }
+      .stage { grid-template-columns: 46px 1fr; gap: 16px; }
+      .stage-detail { grid-column: 1 / -1; }
+      .output-stack { grid-template-columns: 1fr; }
+      .proof-strip { grid-template-columns: repeat(2, 1fr); }
+      .conclusion { padding: 36px 26px; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 41px; }
+      .stage-detail, .qa-categories { grid-template-columns: 1fr; }
+    }
+    @media print {
+      :root { --bg: #fff; --surface: #fff; --surface-2: #f7f7f7; --text: #111; --muted: #4f4f4f; --border: #d8d8d8; --ink: #173e34; }
+      body { background: #fff; font-size: 10pt; }
+      .layout { display: block; }
+      .sidebar, .topbar, .back-top, .mobile-overlay { display: none !important; }
+      main { max-width: none; padding: 0; }
+      section { margin: 0 0 34px; break-inside: avoid; }
+      .hero { min-height: 0; padding: 38px; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .hero h1 { font-size: 36pt; }
+      .hero-meta { margin-top: 35px; }
+      .card, .diagram, .table-wrap, .stage, .creative-card { box-shadow: none; break-inside: avoid; }
+      .reveal { opacity: 1; transform: none; }
+      .creative-media { aspect-ratio: auto; height: 450px; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="mobile-overlay" id="overlay"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Report navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 18V9l8-5 8 5v9l-8 3-8-3Z" stroke="currentColor" stroke-width="1.7"/><path d="M8 10.5 12 13l4-2.5M12 13v8" stroke="currentColor" stroke-width="1.7"/></svg>
+        </div>
+        <div><strong>PAM Playbook</strong><span>Product review · v1.0</span></div>
+      </div>
+      <nav>
+        <p class="nav-label">Report</p>
+        <a class="nav-link active" href="#cover">Cover</a>
+        <a class="nav-link" href="#summary">Executive summary</a>
+        <a class="nav-link" href="#requirements">Requirements</a>
+        <a class="nav-link" href="#workflow">High-level workflow</a>
+        <a class="nav-link" href="#architecture">Architecture</a>
+        <a class="nav-link" href="#inputs">Input schema</a>
+        <a class="nav-link" href="#details">Workflow details</a>
+        <a class="nav-link" href="#outputs">Output specification</a>
+        <a class="nav-link" href="#qa">QA framework</a>
+        <a class="nav-link" href="#evidence">Evidence</a>
+        <a class="nav-link" href="#mapping">Assignment mapping</a>
+        <a class="nav-link" href="#features">Key features</a>
+        <a class="nav-link" href="#conclusion">Conclusion</a>
+      </nav>
+      <div class="sidebar-foot">Prepared from six project documents and two finished creative artifacts.</div>
+    </aside>
+
+    <div class="page">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Open navigation" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div style="display:flex; gap:8px">
+          <button class="icon-button" id="printButton" aria-label="Print report" title="Print report">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 8V4h10v4M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v6H7v-6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="icon-button" id="themeButton" aria-label="Switch to dark mode" title="Toggle dark mode">
+            <svg class="moon" viewBox="0 0 24 24" fill="none"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" stroke="currentColor" stroke-width="1.7"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section id="cover" class="hero">
+          <div>
+            <p class="eyebrow">PAM Playbook Assignment · Enterprise Review</p>
+            <h1>Performance Ad Variations for Seasonal Hospitality Campaigns</h1>
+            <p class="hero-sub">A reusable, quality-gated system for turning verified campaign briefs into premium, platform-ready advertising creative packages.</p>
+          </div>
+          <div class="hero-meta">
+            <div><span>Author</span><strong>PAM Playbook Team</strong></div>
+            <div><span>Prepared</span><strong>24 July 2026</strong></div>
+            <div><span>Version</span><strong>1.0 · Product review</strong></div>
+          </div>
+        </section>
+
+        <section id="summary" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Executive summary</p><h2>A production system, not a one-off prompt</h2></div>
+            <p>The playbook separates facts, strategy, creative generation, platform adaptation, and QA into explicit contracts so campaigns can scale without sacrificing brand or factual integrity.</p>
+          </div>
+          <p class="lead">The selected use case is conversion-oriented seasonal hospitality advertising: a high-value category where fresh creative is needed across destinations, audiences, seasons, platforms, and languages. The workflow converts one validated campaign into multiple testable directions while protecting Vinpearl’s premium positioning.</p>
+          <div class="grid-4" style="margin-top:28px">
+            <article class="card stat"><strong>12</strong><span>Sequential workflow stages</span></article>
+            <article class="card stat"><strong>10</strong><span>Mandatory output sections</span></article>
+            <article class="card stat"><strong>11</strong><span>Weighted QA categories</span></article>
+            <article class="card stat"><strong>2</strong><span>Finished creative artifacts</span></article>
+          </div>
+          <div class="callout">
+            <span class="callout-mark">Why this use case</span>
+            <p>Hospitality acquisition demands both emotional appeal and precise operational facts. A reusable PAM workflow reduces time-to-market, increases A/B testing capacity, supports booking and occupancy goals, and keeps execution consistent across channels.</p>
+          </div>
+        </section>
+
+        <section id="requirements" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Assignment requirements</p><h2>Both deliverables are present</h2></div>
+            <p>The repository includes the documented system and a batch of finished advertising creatives generated for seasonal Vinpearl campaigns.</p>
+          </div>
+          <div class="grid-2">
+            <article class="card check-card">
+              <span class="check" aria-hidden="true">✓</span>
+              <div><h3>Documented Playbook</h3><p>Skill, workflow, input contract, output contract, QA standard, and brand guidelines define inputs → steps → outputs.</p></div>
+            </article>
+            <article class="card check-card">
+              <span class="check" aria-hidden="true">✓</span>
+              <div><h3>Finished Creatives</h3><p>Two portrait-format campaign artifacts demonstrate family and luxury-couples creative directions.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="workflow" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">High-level workflow</p><h2>Gated from brief to export</h2></div>
+            <p>Each stage must complete before the next begins. Failures return to the earliest affected stage; QA-approved content alone can be exported.</p>
+          </div>
+          <div class="diagram" aria-label="Playbook workflow diagram">
+            <pre class="mermaid">
+flowchart LR
+  A[Campaign Brief] --> B[Input Validation]
+  B --> C[Audience Analysis]
+  C --> D[Marketing Strategy]
+  D --> E[Creative Strategy]
+  E --> F[Headline Generation]
+  F --> G[Copy Generation]
+  G --> H[CTA Generation]
+  H --> I[Visual Direction]
+  I --> J[Platform Adaptation]
+  J --> K[Quality Assurance]
+  K -->|PASS| L[Finished Creatives & Export]
+  K -. Localized retry .-> E
+  classDef core fill:#e0f5ed,stroke:#0b7a61,color:#123f35,stroke-width:1.5px;
+  classDef gate fill:#f7ecd7,stroke:#ad7b29,color:#5f4317,stroke-width:1.5px;
+  class A,C,D,E,F,G,H,I,J core;
+  class B,K gate;
+            </pre>
+          </div>
+        </section>
+
+        <section id="architecture" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Playbook architecture</p><h2>Six documents, clear separation of concerns</h2></div>
+            <p>The design keeps AI reasoning, execution, contracts, quality, and brand authority modular—making future revision safer and easier.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>File</th><th>Purpose</th><th>Responsibility</th></tr></thead>
+              <tbody>
+                <tr><td>01_SKILL.md</td><td>Reusable PAM skill definition</td><td>AI roles, activation scope, source hierarchy, reasoning, brand and safety rules</td></tr>
+                <tr><td>02_PLAYBOOK.md</td><td>Standard operating procedure</td><td>12-stage execution flow, dependencies, gates, retries, and completion criteria</td></tr>
+                <tr><td>03_INPUT_SCHEMA.md</td><td>Input contract</td><td>Accepted fields, required values, validation, defaults, source priority, and error handling</td></tr>
+                <tr><td>04_OUTPUT_TEMPLATE.md</td><td>Output contract</td><td>Ten-part creative package, formats, identifiers, export structure, and artifact metadata</td></tr>
+                <tr><td>05_QA_CHECKLIST.md</td><td>Enterprise QA standard</td><td>Weighted scoring, thresholds, critical failures, targeted retries, and escalation</td></tr>
+                <tr><td>Guideline.md</td><td>Vinpearl brand authority</td><td>Premium positioning, tone, imagery, logo use, factual guardrails, and channel intent</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">
+            <span class="callout-mark">Source precedence</span>
+            <p>Campaign Brief → @Brand Guidelines → Verified Campaign Information → @Brand Assets → @Artifacts → @Connectors → Platform Requirements → Creative Optimization → Internal Reasoning.</p>
+          </div>
+        </section>
+
+        <section id="inputs" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Input schema</p><h2>Structured, verified, campaign-specific</h2></div>
+            <p>Creative generation starts only after all mandatory fields pass validation. Missing facts are never fabricated.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card input-card"><span class="number">01</span><span class="kicker">Campaign</span><h3>Name, objective, period</h3><ul class="mini-list"><li>Unique human-readable name</li><li>Exactly one primary objective</li><li>Valid start and end dates</li></ul></article>
+            <article class="card input-card"><span class="number">02</span><span class="kicker">Audience</span><h3>Primary and secondary</h3><ul class="mini-list"><li>One validated primary segment</li><li>Optional non-conflicting segments</li><li>Motivation, style, benefit priorities</li></ul></article>
+            <article class="card input-card"><span class="number">03</span><span class="kicker">Promotion</span><h3>Type, offer, window</h3><ul class="mini-list"><li>Verifiable offer is mandatory</li><li>Supported promotion type</li><li>Booking window within period</li></ul></article>
+            <article class="card input-card"><span class="number">04</span><span class="kicker">Destination</span><h3>Destination and property</h3><ul class="mini-list"><li>Verified destination required</li><li>Optional property must belong</li><li>Stop on invalid information</li></ul></article>
+            <article class="card input-card"><span class="number">05</span><span class="kicker">Platform</span><h3>Channel and placement</h3><ul class="mini-list"><li>Facebook and Instagram</li><li>Google or Responsive Display</li><li>Discovery, Landing Hero, OTA</li></ul></article>
+            <article class="card input-card"><span class="number">06</span><span class="kicker">Creative</span><h3>Objective and constraints</h3><ul class="mini-list"><li>Acquisition, conversion, retargeting</li><li>Optional emotional theme</li><li>Character and wording limits</li></ul></article>
+            <article class="card input-card"><span class="number">07</span><span class="kicker">Brand</span><h3>Guidelines and assets</h3><ul class="mini-list"><li>@Brand Guidelines recommended</li><li>@Brand Assets optional</li><li>References must resolve</li></ul></article>
+            <article class="card input-card"><span class="number">08</span><span class="kicker">Localization</span><h3>Language and locale</h3><ul class="mini-list"><li>Supported language required</li><li>Locale supports adaptation</li><li>Preserve meaning, not literal wording</li></ul></article>
+            <article class="card input-card"><span class="number">09</span><span class="kicker">References</span><h3>Artifacts and connectors</h3><ul class="mini-list"><li>Reuse approved @Artifacts</li><li>@Connectors for verified facts only</li><li>Never override higher-priority data</li></ul></article>
+          </div>
+          <pre aria-label="Condensed example input"><code>{
+  "campaign": { "name": "Summer Escape 2027", "objective": "Bookings",
+    "period": { "start": "2027-05-01", "end": "2027-06-30" } },
+  "audience": { "primary": "Families", "secondary": [] },
+  "promotion": { "type": "Discount",
+    "offer": { "title": "Save 20%", "verified": true } },
+  "destination": { "name": "Phu Quoc", "property": "Example Resort" },
+  "platform": { "channel": "Facebook", "placement": "Feed" },
+  "localization": { "language": "en", "locale": "en-US" },
+  "brand": { "guidelines": "@Brand Guidelines", "assets": "@Brand Assets" }
+}</code></pre>
+        </section>
+
+        <section id="details" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Workflow details</p><h2>Every stage has an explicit contract</h2></div>
+            <p>Purpose, inputs, processing, outputs, and validation remain traceable from campaign intake through final export.</p>
+          </div>
+          <div class="workflow-list">
+            <article class="stage"><div class="stage-num">01</div><div class="stage-title"><h3>Campaign Brief</h3><p>Establish the single source of truth.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Brief, project metadata, user request</div><div><strong>Processing</strong>Parse objective, scope, entities, terminology</div><div><strong>Outputs</strong>Structured Campaign Object</div><div><strong>Validation</strong>Objective exists; scope is coherent</div></div></article>
+            <article class="stage"><div class="stage-num">02</div><div class="stage-title"><h3>Validation</h3><p>Verify before creative reasoning.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Campaign object, verified data, connectors if required</div><div><strong>Processing</strong>Check offer, destination, dates, conflicts</div><div><strong>Outputs</strong>Validated Campaign Object</div><div><strong>Validation</strong>Complete, authoritative, non-contradictory</div></div></article>
+            <article class="stage"><div class="stage-num">03</div><div class="stage-title"><h3>Audience Analysis</h3><p>Translate audience into requirements.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Validated campaign, audience, optional artifacts</div><div><strong>Processing</strong>Motivations, concerns, drivers, benefits</div><div><strong>Outputs</strong>Audience Profile</div><div><strong>Validation</strong>No unsupported assumptions or conflict</div></div></article>
+            <article class="stage"><div class="stage-num">04</div><div class="stage-title"><h3>Marketing Strategy</h3><p>Decide what to communicate.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Campaign, audience, brand guidelines</div><div><strong>Processing</strong>Positioning, angles, value, hierarchy</div><div><strong>Outputs</strong>Marketing Strategy</div><div><strong>Validation</strong>Objective-aligned and premium</div></div></article>
+            <article class="stage"><div class="stage-num">05</div><div class="stage-title"><h3>Creative Strategy</h3><p>Turn strategy into a direction.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Marketing strategy, brand guidelines, assets</div><div><strong>Processing</strong>Hierarchy, emphasis, narrative, differentiation</div><div><strong>Outputs</strong>Creative Strategy</div><div><strong>Validation</strong>One coherent, aligned concept</div></div></article>
+            <article class="stage"><div class="stage-num">06</div><div class="stage-title"><h3>Headline Generation</h3><p>Create meaningful test variants.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Creative and marketing strategies</div><div><strong>Processing</strong>Generate for clarity, relevance, intent</div><div><strong>Outputs</strong>Headline Set</div><div><strong>Validation</strong>Accurate, on-brand, diverse</div></div></article>
+            <article class="stage"><div class="stage-num">07</div><div class="stage-title"><h3>Copy Generation</h3><p>Build persuasive primary copy.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Strategies and headline set</div><div><strong>Processing</strong>Write multiple premium, readable variants</div><div><strong>Outputs</strong>Primary Copy Set</div><div><strong>Validation</strong>Offer and destination stay exact</div></div></article>
+            <article class="stage"><div class="stage-num">08</div><div class="stage-title"><h3>CTA Generation</h3><p>Match action to readiness and intent.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Marketing strategy, platforms</div><div><strong>Processing</strong>Rank by intent, friction, expectation</div><div><strong>Outputs</strong>CTA Set</div><div><strong>Validation</strong>Clear, accurate, non-misleading</div></div></article>
+            <article class="stage"><div class="stage-num">09</div><div class="stage-title"><h3>Visual Direction</h3><p>Specify production intent.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Creative strategy, assets, guidelines</div><div><strong>Processing</strong>Scene, focal point, hierarchy, cues</div><div><strong>Outputs</strong>Visual Direction Specification</div><div><strong>Validation</strong>Premium, supported, brand-aligned</div></div></article>
+            <article class="stage"><div class="stage-num">10</div><div class="stage-title"><h3>Platform Adaptation</h3><p>Change presentation, not meaning.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Headlines, copy, CTAs, visual direction</div><div><strong>Processing</strong>Adjust length, structure, layout, hierarchy</div><div><strong>Outputs</strong>Platform-Specific Variants</div><div><strong>Validation</strong>Compatible, readable, consistent</div></div></article>
+            <article class="stage"><div class="stage-num">11</div><div class="stage-title"><h3>Quality Assurance</h3><p>Mandatory release gate.</p></div><div class="stage-detail"><div><strong>Inputs</strong>Package, guidelines, assets</div><div><strong>Processing</strong>Score facts, brand, language, fit, diversity</div><div><strong>Outputs</strong>PASS, REVIEW, or FAIL report</div><div><strong>Validation</strong>No fabrication, contradiction, or critical issue</div></div></article>
+            <article class="stage"><div class="stage-num">12</div><div class="stage-title"><h3>Export</h3><p>Package approved deliverables.</p></div><div class="stage-detail"><div><strong>Inputs</strong>QA-approved creative package</div><div><strong>Processing</strong>Assemble metadata, artifacts, platform groups</div><div><strong>Outputs</strong>Final Creative Package</div><div><strong>Validation</strong>PASS status, complete and correctly named</div></div></article>
+          </div>
+        </section>
+
+        <section id="outputs" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Output specification</p><h2>Predictable for people and systems</h2></div>
+            <p>Every execution returns one traceable Creative Package with deterministic identifiers, platform selections, and a structured QA decision.</p>
+          </div>
+          <div class="card">
+            <div class="output-stack">
+              <article class="output-item"><h3>Campaign Summary</h3><p>Validated campaign facts only: name, objective, destination, audience, offer, timing, platforms, language.</p></article>
+              <article class="output-item"><h3>Marketing Strategy</h3><p>Positioning, angles, value proposition, motivation, message hierarchy, and CTA strategy.</p></article>
+              <article class="output-item"><h3>Creative Brief</h3><p>Core message, objective, direction, tone, benefit hierarchy, constraints, and brand references.</p></article>
+              <article class="output-item"><h3>Headline Variations</h3><p>H01…Hn with strategic intent and target platforms.</p></article>
+              <article class="output-item"><h3>Primary Copy Variations</h3><p>C01…Cn with focus, audience fit, and platform recommendation.</p></article>
+              <article class="output-item"><h3>CTA Variations</h3><p>CTA01…CTAn ranked by objective, platform, and reasoning.</p></article>
+              <article class="output-item"><h3>Visual Concepts</h3><p>VC01…VCn with scene, composition, hierarchy, cues, colors, and asset references.</p></article>
+              <article class="output-item"><h3>Platform Variants</h3><p>FB, IG, GDN, OTA, or LP selections with layout and adaptation notes.</p></article>
+              <article class="output-item"><h3>Creative Rationale</h3><p>Strategic, audience, platform, offer, positioning, and diversity alignment.</p></article>
+              <article class="output-item"><h3>QA Report</h3><p>Status, overall score, category scores, findings, and recommended actions.</p></article>
+            </div>
+          </div>
+          <div class="callout">
+            <span class="callout-mark">Persistence rule</span>
+            <p>Only QA-approved outputs are promoted to reusable @Artifacts, with campaign identifier, timestamp, language, destination, audience, platform, version, and approval status.</p>
+          </div>
+        </section>
+
+        <section id="qa" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">QA framework</p><h2>Creativity never overrides correctness</h2></div>
+            <p>Eleven categories are scored from 0–5 and normalized to 100. Factual accuracy, brand integrity, and data integrity carry the greatest weight.</p>
+          </div>
+          <div class="qa-layout">
+            <article class="card">
+              <span class="kicker">Weighted categories</span>
+              <div class="qa-categories">
+                <div class="qa-row"><span>Brand Consistency</span><strong>15%</strong></div>
+                <div class="qa-row"><span>Offer Accuracy</span><strong>15%</strong></div>
+                <div class="qa-row"><span>Destination Accuracy</span><strong>10%</strong></div>
+                <div class="qa-row"><span>Grammar</span><strong>5%</strong></div>
+                <div class="qa-row"><span>Readability</span><strong>10%</strong></div>
+                <div class="qa-row"><span>Audience Alignment</span><strong>10%</strong></div>
+                <div class="qa-row"><span>Platform Compliance</span><strong>10%</strong></div>
+                <div class="qa-row"><span>CTA Effectiveness</span><strong>5%</strong></div>
+                <div class="qa-row"><span>Creative Diversity</span><strong>10%</strong></div>
+                <div class="qa-row"><span>Visual Consistency</span><strong>5%</strong></div>
+                <div class="qa-row"><span>Data Integrity</span><strong>15%</strong></div>
+              </div>
+            </article>
+            <article class="card">
+              <span class="kicker">Release thresholds</span>
+              <div class="threshold"><div><span class="badge pass">PASS</span><p>No factual errors, brand violations, or unresolved findings.</p></div><span class="threshold-score">≥ 90</span></div>
+              <div class="threshold"><div><span class="badge gold">REVIEW</span><p>Minor quality issues; revise and rerun QA.</p></div><span class="threshold-score">75–89</span></div>
+              <div class="threshold"><div><span class="badge required">FAIL</span><p>Critical issue, contradiction, or brand violation.</p></div><span class="threshold-score">&lt; 75</span></div>
+            </article>
+          </div>
+          <div class="grid-2" style="margin-top:20px">
+            <article class="card"><span class="kicker">Critical failure checklist</span><ul class="mini-list"><li>No invented offer, pricing, package, or booking period</li><li>No incorrect destination or property</li><li>No fabricated facts, statistics, reviews, awards, or claims</li><li>No deceptive urgency, guarantees, or prohibited language</li><li>No missing mandatory output sections</li></ul></article>
+            <article class="card"><span class="kicker">Controlled recovery</span><ul class="mini-list"><li>Retry only the earliest affected stage</li><li>Maximum three automatic retries</li><li>Escalate unresolved brand, campaign, legal, or creative issues</li><li>Human approval remains mandatory before publication</li><li>A failed quality gate blocks all downstream gates</li></ul></article>
+          </div>
+        </section>
+
+        <section id="evidence" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Evidence</p><h2>Two finished campaign creatives</h2></div>
+            <p>The supplied batch demonstrates meaningful variation in audience, destination, offer, emotional angle, and visual direction—not merely superficial copy changes.</p>
+          </div>
+          <div class="evidence-grid">
+            <figure class="card creative-card">
+              <div class="creative-media"><img src="results/Vinpearl_Nha_Trang_Summer.png" alt="Vinpearl Nha Trang Summer Escape advertising creative featuring a family beside a beachfront pool." loading="lazy"></div>
+              <figcaption class="creative-body">
+                <h3>Vinpearl Nha Trang · Summer Escape</h3>
+                <p>Family-led beach holiday direction with a clear “Stay 3, Pay 2” offer, campaign dates, destination, and booking CTA.</p>
+                <div class="tags"><span class="badge">Families</span><span class="badge">Nha Trang</span><span class="badge">Seasonal offer</span><span class="badge">Conversion</span></div>
+              </figcaption>
+            </figure>
+            <figure class="card creative-card">
+              <div class="creative-media"><img src="results/Vinpearl_Luxury_Island_Escape.png" alt="Vinpearl Phu Quoc Luxury Island Escape advertising creative featuring a couple beside a beachfront villa pool." loading="lazy"></div>
+              <figcaption class="creative-body">
+                <h3>Vinpearl Phu Quoc · Luxury Island Escape</h3>
+                <p>Couples-focused premium direction centered on beachfront villas, airport transfers, daily breakfast, campaign dates, and booking CTA.</p>
+                <div class="tags"><span class="badge">Couples</span><span class="badge">Phu Quoc</span><span class="badge">Added value</span><span class="badge">Luxury</span></div>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="proof-strip">
+            <div><strong>2</strong><span>Creative directions</span></div>
+            <div><strong>2</strong><span>Audience angles</span></div>
+            <div><strong>2</strong><span>Destinations</span></div>
+            <div><strong>1</strong><span>Reusable system</span></div>
+          </div>
+          <div class="callout">
+            <span class="callout-mark">Review boundary</span>
+            <p>These files demonstrate generated creative output. Under the documented governance model, completed artwork still proceeds through brand, factual, visual, and human review before publication.</p>
+          </div>
+        </section>
+
+        <section id="mapping" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Assignment mapping</p><h2>Requirement → evidence</h2></div>
+            <p>Every requested deliverable maps to an inspectable file, report section, or finished artifact.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Assignment requirement</th><th>Evidence</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>High-value marketing creative use case</td><td>01_SKILL.md + Executive Summary</td><td>Seasonal hospitality performance advertising for bookings, occupancy, and package promotion</td></tr>
+                <tr><td>Documented playbook: inputs</td><td>03_INPUT_SCHEMA.md</td><td>Campaign, audience, promotion, destination, platform, brand, localization, and references</td></tr>
+                <tr><td>Documented playbook: steps</td><td>02_PLAYBOOK.md</td><td>12 gated stages from Campaign Brief to Export</td></tr>
+                <tr><td>Documented playbook: outputs</td><td>04_OUTPUT_TEMPLATE.md</td><td>Ten-part Creative Package in human- and machine-readable form</td></tr>
+                <tr><td>Reusable PAM skill</td><td>01_SKILL.md</td><td>Activation rules, AI team, knowledge hierarchy, reasoning and safety rules</td></tr>
+                <tr><td>Enterprise quality control</td><td>05_QA_CHECKLIST.md</td><td>11 weighted categories, PASS ≥ 90, retries, escalations, and critical fail rules</td></tr>
+                <tr><td>Brand alignment</td><td>Guideline.md</td><td>Vinpearl premium tone, imagery, logo, factual, and copy requirements</td></tr>
+                <tr><td>Finished creatives</td><td>results/*.png</td><td>Vinpearl Nha Trang Summer + Vinpearl Luxury Island Escape</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="features" class="reveal">
+          <div class="section-head">
+            <div><p class="eyebrow">Key features</p><h2>Designed for reuse without creative drift</h2></div>
+            <p>Modular contracts allow the same core system to flex across campaigns while stable controls protect the facts and the brand.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h10M4 12h16M4 17h8M17 4l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Portable across contexts</h3><p>Reusable across campaigns, destinations, audiences, seasons, platforms, and languages.</p></article>
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z" stroke="currentColor" stroke-width="1.8"/><path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.8"/></svg><h3>Fact and brand guarded</h3><p>Verified data and brand sources outrank creative reasoning and platform optimization.</p></article>
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7zM3 12h4m10 0h4M12 3v4m0 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h3>Modular contracts</h3><p>Skill, SOP, input, output, QA, and brand documents can evolve independently.</p></article>
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V8m6 10V4m6 14v-7m4 7H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h3>Built for testing</h3><p>Variations differ by communication strategy, audience motivation, emotional angle, and composition.</p></article>
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6h11a3 3 0 0 1 3 3v9M19 18l-3-3m3 3 3-3M19 6H8a3 3 0 0 0-3 3v9M5 18l-3-3m3 3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Localized retries</h3><p>Quality issues rerun only the earliest affected stage, up to three times, preserving efficient work.</p></article>
+            <article class="card feature-card"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><h3>Traceable outputs</h3><p>Stable IDs, metadata, rationale, and QA findings support review and reusable artifact storage.</p></article>
+          </div>
+        </section>
+
+        <section id="conclusion" class="conclusion reveal">
+          <span class="badge">Assignment complete</span>
+          <h2 style="margin-top:20px">A repeatable path from verified brief to review-ready creative</h2>
+          <p>This PAM playbook turns seasonal hospitality campaign inputs into strategically differentiated, platform-adapted creative packages. It combines a reusable workflow with strict source precedence, explicit output contracts, and enterprise QA—then demonstrates the system through two finished Vinpearl campaign artifacts.</p>
+          <p style="margin-bottom:0"><strong style="color:#fff">Result:</strong> documented inputs → steps → outputs, plus a tangible batch of finished creatives ready for formal human review.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none"><path d="m6 14 6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeButton = document.getElementById('themeButton');
+      const savedTheme = localStorage.getItem('pam-theme');
+      const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function setTheme(theme) {
+        root.dataset.theme = theme;
+        localStorage.setItem('pam-theme', theme);
+        themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+      setTheme(savedTheme || (preferredDark ? 'dark' : 'light'));
+      themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+      document.getElementById('printButton').addEventListener('click', () => window.print());
+
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const menuButton = document.getElementById('menuButton');
+      function toggleMenu(force) {
+        const open = typeof force === 'boolean' ? force : !sidebar.classList.contains('open');
+        sidebar.classList.toggle('open', open);
+        overlay.classList.toggle('show', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+      }
+      menuButton.addEventListener('click', () => toggleMenu());
+      overlay.addEventListener('click', () => toggleMenu(false));
+      document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+      const links = [...document.querySelectorAll('.nav-link')];
+      const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+      const spy = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(section => spy.observe(section));
+
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .06 });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      const backTop = document.getElementById('backTop');
+      window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 700), { passive: true });
+      backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: root.dataset.theme === 'dark' ? 'dark' : 'base',
+        securityLevel: 'loose',
+        fontFamily: 'DM Sans',
+        flowchart: { curve: 'basis', htmlLabels: true, nodeSpacing: 30, rankSpacing: 38 },
+        themeVariables: {
+          primaryColor: '#dff5ed',
+          primaryTextColor: '#123f35',
+          primaryBorderColor: '#0b7a61',
+          lineColor: '#71847d',
+          fontSize: '13px'
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
