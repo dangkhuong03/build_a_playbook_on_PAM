@@ -800,7 +800,7 @@ flowchart LR
       }
 
       function openDiagramZoom() {
-        const sourceSvg = workflowDiagram.querySelector('svg');
+        const sourceSvg = workflowDiagram.querySelector('.mermaid svg');
         if (!sourceSvg) return;
         const clone = sourceSvg.cloneNode(true);
         clone.removeAttribute('style');
