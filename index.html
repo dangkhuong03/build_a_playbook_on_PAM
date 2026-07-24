@@ -124,10 +124,11 @@
     .icon-button:hover, .menu-button:hover { border-color: var(--border-strong); transform: translateY(-1px); }
     .icon-button svg, .menu-button svg { width: 18px; height: 18px; }
     .menu-button { display: none; }
-    main { max-width: calc(var(--content) + 96px); margin: 0 auto; padding: 42px 48px 110px; }
-    section { margin: 0 0 92px; scroll-margin-top: 26px; }
+    main { max-width: calc(var(--content) + 96px); margin: 0 auto; padding: 32px 48px 76px; }
+    section { margin: 0 0 68px; scroll-margin-top: 26px; }
+    section:last-child { margin-bottom: 0; }
     .hero {
-      position: relative; overflow: hidden; padding: 68px; min-height: 620px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; padding: 50px; min-height: 540px; display: flex; flex-direction: column; justify-content: space-between;
       background:#0d6e4c; color: #fff; border-radius: 32px; box-shadow: var(--shadow-lg);
     }
     .hero::before {
@@ -141,34 +142,34 @@
     }
     .hero > * { position: relative; z-index: 1; }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin: 0 0 20px;
+      display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin: 0 0 12px;
       color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase;
     }
     .hero .eyebrow { color: #95e0c8; }
     .eyebrow::before { content: ""; width: 20px; height: 1px; background: currentColor; }
     h1, h2, h3, h4 { font-family: "Times New Roman", Times, serif; line-height: 1.16; margin: 0; letter-spacing: -.035em; }
     h1 { max-width: 820px; font-size: clamp(46px, 6vw, 76px); font-weight: 700; }
-    .hero-sub { max-width: 650px; margin: 24px 0 0; color: #c6d9d3; font-size: 20px; line-height: 1.55; }
-    .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 60px; }
-    .hero-meta div { padding-top: 14px; border-top: 1px solid rgba(255,255,255,.2); }
+    .hero-sub { max-width: 650px; margin: 16px 0 0; color: #c6d9d3; font-size: 20px; line-height: 1.55; }
+    .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 38px; }
+    .hero-meta div { padding-top: 10px; border-top: 1px solid rgba(255,255,255,.2); }
     .hero-meta span { display: block; color: #91aaa2; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .hero-meta strong { display: block; margin-top: 4px; color: #fff; font-size: 13px; font-weight: 600; }
-    .section-head { display: grid; grid-template-columns: 1fr minmax(280px, 430px); gap: 50px; align-items: end; margin-bottom: 34px; }
+    .section-head { display: grid; grid-template-columns: 1fr minmax(280px, 430px); gap: 34px; align-items: end; margin-bottom: 22px; }
     .section-head h2 { font-size: clamp(34px, 4vw, 48px); }
     .section-head p { margin: 0; color: var(--muted); }
     .lead { max-width: 800px; color: var(--muted); font-size: 18px; }
-    .grid-2, .grid-3, .grid-4 { display: grid; gap: 18px; }
+    .grid-2, .grid-3, .grid-4 { display: grid; gap: 16px; }
     .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .card {
-      position: relative; padding: 26px; background: var(--surface); border: 1px solid var(--border);
+      position: relative; padding: 22px; background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: var(--shadow-sm);
     }
     .card h3 { font-size: 18px; }
     .card p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-    .card .kicker { display: block; margin-bottom: 20px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    .stat { padding: 28px; }
+    .card .kicker { display: block; margin-bottom: 12px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .stat { padding: 23px; }
     .stat strong { display: block; color: var(--ink); font-family: "Times New Roman", Times, serif; font-size: 38px; line-height: 1; }
     .stat span { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; }
     .check-card { display: flex; gap: 16px; align-items: flex-start; }
@@ -177,7 +178,7 @@
       background: var(--accent-2); color: var(--accent); font-weight: 800;
     }
     .callout {
-      display: flex; align-items: flex-start; gap: 18px; margin-top: 22px; padding: 24px 26px;
+      display: flex; align-items: flex-start; gap: 14px; margin-top: 16px; padding: 18px 22px;
       border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: var(--radius);
       background: color-mix(in srgb, var(--accent-2) 58%, var(--surface));
     }
@@ -185,7 +186,7 @@
     .callout p { margin: 0; color: var(--muted); font-size: 14px; }
     .callout-mark { font-family: "Times New Roman", Times, serif; color: var(--accent); font-weight: 800; }
     .diagram {
-      position: relative; overflow-x: auto; padding: 54px 18px 34px; background: var(--surface); border: 1px solid var(--border);
+      position: relative; overflow-x: auto; padding: 42px 16px 24px; background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); cursor: zoom-in; transition: border-color .2s ease, box-shadow .2s ease;
     }
     .diagram:hover { border-color: color-mix(in srgb, var(--accent) 52%, var(--border)); box-shadow: 0 10px 30px rgba(22, 52, 43, .09); }
@@ -204,8 +205,8 @@
     }
     .zoom-dialog::backdrop { background: rgba(4, 13, 11, .68); backdrop-filter: blur(5px); }
     .zoom-header {
-      display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px;
-      padding: 12px 16px 12px 22px; border-bottom: 1px solid var(--border); background: var(--surface);
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 58px;
+      padding: 9px 14px 9px 18px; border-bottom: 1px solid var(--border); background: var(--surface);
     }
     .zoom-title { min-width: 0; }
     .zoom-title strong { display: block; font-family: "Times New Roman", Times, serif; font-size: 15px; }
@@ -220,17 +221,17 @@
     .zoom-button svg { width: 17px; height: 17px; }
     .zoom-level { min-width: 52px; color: var(--muted); font-size: 12px; font-weight: 700; text-align: center; }
     .zoom-canvas {
-      height: calc(94vh - 64px); overflow: auto; overscroll-behavior: contain;
+      height: calc(94vh - 58px); overflow: auto; overscroll-behavior: contain;
       background-color: var(--surface-2);
       background-image: radial-gradient(var(--border-strong) .7px, transparent .7px);
       background-size: 18px 18px;
     }
-    .zoom-content { width: max-content; min-width: 100%; min-height: 100%; padding: 46px; display: grid; place-items: center; }
+    .zoom-content { width: max-content; min-width: 100%; min-height: 100%; padding: 34px; display: grid; place-items: center; }
     .zoom-content svg { display: block; max-width: none !important; height: auto !important; filter: drop-shadow(0 8px 24px rgba(22, 52, 43, .08)); }
     .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
     table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 14px; }
-    th { padding: 14px 18px; color: var(--muted); background: var(--surface-2); border-bottom: 1px solid var(--border); text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
-    td { padding: 17px 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { padding: 11px 16px; color: var(--muted); background: var(--surface-2); border-bottom: 1px solid var(--border); text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+    td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
     tr:last-child td { border-bottom: 0; }
     td:first-child { font-weight: 600; color: var(--text); }
     .evidence-link { color: var(--accent); font-weight: 700; text-underline-offset: 3px; }
@@ -244,8 +245,8 @@
     .badge.gold { color: var(--gold); background: var(--gold-soft); }
     .input-card { min-height: 180px; }
     .input-card .number { position: absolute; right: 22px; top: 19px; color: var(--border-strong); font-family: "Times New Roman", Times, serif; font-size: 24px; font-weight: 800; }
-    .mini-list { margin: 14px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
-    .mini-list li { padding: 5px 0; }
+    .mini-list { margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+    .mini-list li { padding: 3px 0; }
     .mini-list li::before { content: "—"; margin-right: 8px; color: var(--accent); }
     .workflow-list { display: grid; gap: 16px; position: relative; }
     .stage {
@@ -282,23 +283,23 @@
     .threshold:last-child { border: 0; }
     .threshold p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
     .threshold-score { font-family: "Times New Roman", Times, serif; font-size: 17px; font-weight: 800; }
-    .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+    .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
     .creative-card { overflow: hidden; padding: 0; }
     .creative-media { position: relative; overflow: hidden; background: var(--surface-3); aspect-ratio: 4 / 5; }
     .creative-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .45s ease; }
     .creative-card:hover img { transform: scale(1.018); }
-    .creative-body { padding: 22px; }
+    .creative-body { padding: 18px; }
     .creative-body h3 { font-size: 18px; }
-    .creative-body p { margin: 7px 0 14px; }
+    .creative-body p { margin: 6px 0 10px; }
     .tags { display: flex; flex-wrap: wrap; gap: 7px; }
-    .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 22px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--border); }
+    .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 16px; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--border); }
     .proof-strip.results-proof { grid-template-columns: repeat(5, 1fr); }
-    .proof-strip div { padding: 18px; background: var(--surface); text-align: center; }
+    .proof-strip div { padding: 14px; background: var(--surface); text-align: center; }
     .proof-strip strong { display: block; color: var(--accent); font-family: "Times New Roman", Times, serif; font-size: 21px; }
     .proof-strip span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
     .feature-card svg { width: 22px; height: 22px; color: var(--accent); margin-bottom: 22px; }
     .conclusion {
-      overflow: hidden; position: relative; padding: 54px; border-radius: var(--radius-lg);
+      overflow: hidden; position: relative; padding: 38px; border-radius: var(--radius-lg);
       background: linear-gradient(135deg, #0d6e4c, #0a5a3e); color: #fff; box-shadow: var(--shadow-lg);
     }
     .conclusion h2 { max-width: 700px; font-size: clamp(32px, 4vw, 48px); }
@@ -325,22 +326,22 @@
       main { padding-top: 30px; }
     }
     @media (max-width: 760px) {
-      main { padding: 24px 18px 90px; }
-      section { margin-bottom: 68px; }
-      .hero { padding: 36px 26px; min-height: 620px; border-radius: 22px; }
-      .hero-meta { grid-template-columns: 1fr; gap: 12px; margin-top: 42px; }
-      .section-head { grid-template-columns: 1fr; gap: 14px; }
+      main { padding: 20px 18px 64px; }
+      section { margin-bottom: 52px; }
+      .hero { padding: 28px 24px; min-height: 500px; border-radius: 22px; }
+      .hero-meta { grid-template-columns: 1fr; gap: 9px; margin-top: 30px; }
+      .section-head { grid-template-columns: 1fr; gap: 10px; }
       .grid-2, .grid-3, .grid-4, .evidence-grid, .qa-layout { grid-template-columns: 1fr; }
       .stage { grid-template-columns: 46px 1fr; gap: 16px; }
       .stage-detail { grid-column: 1 / -1; }
       .output-stack { grid-template-columns: 1fr; }
       .proof-strip { grid-template-columns: repeat(2, 1fr); }
       .proof-strip.results-proof { grid-template-columns: repeat(2, 1fr); }
-      .conclusion { padding: 36px 26px; }
+      .conclusion { padding: 28px 24px; }
       .zoom-dialog { width: 100vw; height: 100vh; border: 0; border-radius: 0; }
       .zoom-title span { display: none; }
-      .zoom-canvas { height: calc(100vh - 64px); }
-      .zoom-content { padding: 28px; }
+      .zoom-canvas { height: calc(100vh - 58px); }
+      .zoom-content { padding: 22px; }
     }
     @media (max-width: 480px) {
       h1 { font-size: 41px; }
@@ -380,7 +381,7 @@
         <a class="nav-link active" href="#cover">Trang bìa</a>
         <a class="nav-link" href="#summary">Tóm tắt điều hành</a>
         <a class="nav-link" href="#results">Kết quả cuối cùng</a>
-        <a class="nav-link" href="#overview">Tổng quan Playbook</a>
+        <a class="nav-link" href="#workflow">Quy trình tổng quan</a>
         <a class="nav-link" href="#deliverables">Sản phẩm bàn giao</a>
         <a class="nav-link" href="#mapping">Đối chiếu yêu cầu</a>
         <a class="nav-link" href="#conclusion">Kết luận</a>
@@ -403,7 +404,7 @@
       <main id="main">
         <section id="cover" class="hero">
           <div>
-            <p class="eyebrow">Bài tập hoàn thành · PAM Playbook</p>
+            <p class="eyebrow">Day 7-Pick a high-value marketing creative use case and build a playbook on PAM to produce that kind of creatives</p>
             <h1>Quảng cáo hiệu suất cho chiến dịch nghỉ dưỡng theo mùa của Vinpearl</h1>
             <p class="hero-sub">Một Playbook có thể tái sử dụng đã được xây dựng, lập tài liệu và chứng minh bằng hai mẫu quảng cáo hoàn chỉnh.</p>
           </div>
@@ -423,7 +424,7 @@
             <span class="callout-mark">Outcome</span>
             <p>Playbook đã hoàn thành và được chứng minh bằng hai quảng cáo Vinpearl, đồng thời bao phủ đầy đủ Inputs → Steps → Outputs → Quality Assurance.</p>
           </div>
-          <div class="grid-2" style="margin-top:20px">
+          <div class="grid-2" style="margin-top:16px">
             <article class="card">
               <span class="kicker">01 · Problem</span>
               <p>Các chiến dịch nghỉ dưỡng theo mùa cần liên tục tạo nội dung mới cho nhiều đối tượng, điểm đến và nền tảng, nhưng mỗi biến thể vẫn phải giữ đúng ưu đãi, dữ kiện và định vị thương hiệu. Cách làm bằng các câu lệnh rời rạc khó tái sử dụng, khó kiểm soát chất lượng và không tạo ra một bộ đầu ra nhất quán để đội ngũ tiếp thị đánh giá.</p>
@@ -483,7 +484,7 @@
             <div><strong>QA</strong><span>Framework implemented</span></div>
             <div><strong>2</strong><span>Finished creatives</span></div>
           </div>
-          <div class="table-wrap" style="margin-top:20px">
+          <div class="table-wrap" style="margin-top:14px">
             <table>
               <thead><tr><th>Requirement</th><th>Evidence</th></tr></thead>
               <tbody>
@@ -500,10 +501,10 @@
           </div>
         </section>
 
-        <section id="overview" class="reveal">
+        <section id="workflow" class="reveal">
           <div class="section-head">
-            <div><p class="eyebrow">Tổng quan Playbook</p><h2>Inputs → Steps → Outputs</h2></div>
-            <p>Một luồng có cấu trúc biến dữ liệu chiến dịch đã xác minh thành Creative Package hoàn chỉnh.</p>
+            <div><p class="eyebrow">Quy trình tổng quan</p><h2>Toàn bộ quy trình Playbook: Đầu vào → Các bước → Kết quả</h2></div>
+            <p>Mỗi giai đoạn phải hoàn tất trước khi giai đoạn kế tiếp bắt đầu. Lỗi sẽ quay về giai đoạn sớm nhất bị ảnh hưởng; chỉ nội dung đã đạt kiểm định mới được xuất.</p>
           </div>
           <div class="diagram" id="workflowDiagram" role="button" tabindex="0" aria-label="Sơ đồ quy trình cẩm nang. Nhấp để mở chế độ xem phóng to." aria-haspopup="dialog">
             <span class="diagram-hint" aria-hidden="true">
@@ -512,51 +513,23 @@
             </span>
             <pre class="mermaid">
 flowchart LR
-  A[Inputs] --> S1[01 · Campaign Brief]
-  S1 --> S2[02 · Input Validation]
-  S2 --> S3[03 · Audience Analysis]
-  S3 --> S4[04 · Marketing Strategy]
-  S4 --> S5[05 · Creative Strategy]
-  S5 --> S6[06 · Headline Generation]
-  S6 --> S7[07 · Copy Generation]
-  S7 --> S8[08 · CTA Generation]
-  S8 --> S9[09 · Visual Direction]
-  S9 --> S10[10 · Platform Adaptation]
-  S10 --> S11[11 · Quality Assurance]
-  S11 --> S12[12 · Export]
-  S12 --> C[Outputs]
+  A[Bản tóm tắt chiến dịch] --> B[Xác thực đầu vào]
+  B --> C[Phân tích đối tượng]
+  C --> D[Chiến lược tiếp thị]
+  D --> E[Chiến lược sáng tạo]
+  E --> F[Tạo tiêu đề]
+  F --> G[Tạo nội dung]
+  G --> H[Tạo lời kêu gọi hành động]
+  H --> I[Định hướng hình ảnh]
+  I --> J[Điều chỉnh theo nền tảng]
+  J --> K[Kiểm định chất lượng]
+  K -->|ĐẠT| L[Sản phẩm hoàn chỉnh và xuất bản]
+  K -. Thử lại cục bộ .-> E
   classDef core fill:#e0f5ed,stroke:#0b7a61,color:#123f35,stroke-width:1.5px;
   classDef gate fill:#f7ecd7,stroke:#ad7b29,color:#5f4317,stroke-width:1.5px;
-  class A,C,S1,S3,S4,S5,S6,S7,S8,S9,S10,S12 core;
-  class S2,S11 gate;
+  class A,C,D,E,F,G,H,I,J core;
+  class B,K gate;
             </pre>
-          </div>
-          <div class="grid-3" style="margin-top:20px">
-            <article class="card">
-              <span class="kicker">Inputs</span>
-              <ul class="mini-list"><li>Campaign Brief</li><li>Audience</li><li>Destination</li><li>Offer</li><li>Platform</li><li>Language</li></ul>
-            </article>
-            <article class="card">
-              <span class="kicker">12-Step Workflow</span>
-              <ul class="mini-list">
-                <li>01 · Campaign Brief</li>
-                <li>02 · Input Validation</li>
-                <li>03 · Audience Analysis</li>
-                <li>04 · Marketing Strategy</li>
-                <li>05 · Creative Strategy</li>
-                <li>06 · Headline Generation</li>
-                <li>07 · Copy Generation</li>
-                <li>08 · CTA Generation</li>
-                <li>09 · Visual Direction</li>
-                <li>10 · Platform Adaptation</li>
-                <li>11 · Quality Assurance</li>
-                <li>12 · Export</li>
-              </ul>
-            </article>
-            <article class="card">
-              <span class="kicker">Outputs</span>
-              <ul class="mini-list"><li>Marketing Strategy</li><li>Creative Brief</li><li>Headline · Copy · CTA</li><li>Visual Direction</li><li>Platform Variants</li><li>QA Report · Finished Creatives</li></ul>
-            </article>
           </div>
         </section>
 
@@ -597,8 +570,7 @@ flowchart LR
         </section>
 
         <section id="conclusion" class="conclusion reveal">
-          <span class="badge">Hoàn thành bài tập</span>
-          <h2 style="margin-top:20px">Một Playbook có thể tái sử dụng, được chứng minh bằng kết quả hoàn chỉnh</h2>
+          <h2 style="margin-top:14px">Một Playbook có thể tái sử dụng, được chứng minh bằng kết quả hoàn chỉnh</h2>
           <p>Sáu tài liệu xác định rõ Inputs → Steps → Outputs, quy trình 12 bước và khung QA. Hai quảng cáo Vinpearl hoàn chỉnh chứng minh hệ thống có thể biến Campaign Brief thành Creative Package hữu hình.</p>
         </section>
       </main>
@@ -608,7 +580,7 @@ flowchart LR
   <dialog class="zoom-dialog" id="diagramZoom" aria-labelledby="diagramZoomTitle">
     <div class="zoom-header">
       <div class="zoom-title">
-        <strong id="diagramZoomTitle">Tổng quan Playbook: Inputs → Steps → Outputs</strong>
+        <strong id="diagramZoomTitle">Kiểm soát theo cổng từ bản tóm tắt đến xuất bản</strong>
         <span>Cuộn để di chuyển · Dùng các nút điều khiển để đổi tỷ lệ · Nhấn Esc để đóng</span>
       </div>
       <div class="zoom-actions" aria-label="Điều khiển thu phóng sơ đồ">
