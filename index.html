@@ -185,10 +185,48 @@
     .callout p { margin: 0; color: var(--muted); font-size: 14px; }
     .callout-mark { font-family: Manrope; color: var(--accent); font-weight: 800; }
     .diagram {
-      overflow-x: auto; padding: 34px 18px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      position: relative; overflow-x: auto; padding: 54px 18px 34px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); cursor: zoom-in; transition: border-color .2s ease, box-shadow .2s ease;
     }
+    .diagram:hover { border-color: color-mix(in srgb, var(--accent) 52%, var(--border)); box-shadow: 0 10px 30px rgba(22, 52, 43, .09); }
+    .diagram:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 32%, transparent); outline-offset: 4px; }
     .diagram .mermaid { min-width: 840px; display: flex; justify-content: center; }
+    .diagram-hint {
+      position: absolute; z-index: 2; top: 14px; right: 16px; display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 10px; border: 1px solid var(--border); border-radius: 9px; background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--muted); font-size: 11px; font-weight: 700; box-shadow: var(--shadow-sm); pointer-events: none;
+    }
+    .diagram-hint svg { width: 14px; height: 14px; color: var(--accent); }
+    .zoom-dialog {
+      width: min(96vw, 1640px); height: 94vh; max-width: none; max-height: none; padding: 0;
+      overflow: hidden; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, .28);
+    }
+    .zoom-dialog::backdrop { background: rgba(4, 13, 11, .68); backdrop-filter: blur(5px); }
+    .zoom-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px;
+      padding: 12px 16px 12px 22px; border-bottom: 1px solid var(--border); background: var(--surface);
+    }
+    .zoom-title { min-width: 0; }
+    .zoom-title strong { display: block; font-family: Manrope, sans-serif; font-size: 15px; }
+    .zoom-title span { display: block; color: var(--muted); font-size: 11px; }
+    .zoom-actions { display: flex; align-items: center; gap: 7px; }
+    .zoom-button {
+      display: inline-grid; place-items: center; min-width: 38px; height: 38px; padding: 0 11px; border: 1px solid var(--border);
+      border-radius: 10px; background: var(--surface-2); color: var(--text); cursor: pointer;
+    }
+    .zoom-button:hover { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+    .zoom-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 28%, transparent); outline-offset: 2px; }
+    .zoom-button svg { width: 17px; height: 17px; }
+    .zoom-level { min-width: 52px; color: var(--muted); font-size: 12px; font-weight: 700; text-align: center; }
+    .zoom-canvas {
+      height: calc(94vh - 64px); overflow: auto; overscroll-behavior: contain;
+      background-color: var(--surface-2);
+      background-image: radial-gradient(var(--border-strong) .7px, transparent .7px);
+      background-size: 18px 18px;
+    }
+    .zoom-content { width: max-content; min-width: 100%; min-height: 100%; padding: 46px; display: grid; place-items: center; }
+    .zoom-content svg { display: block; max-width: none !important; height: auto !important; filter: drop-shadow(0 8px 24px rgba(22, 52, 43, .08)); }
     .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); }
     table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 14px; }
     th { padding: 14px 18px; color: var(--muted); background: var(--surface-2); border-bottom: 1px solid var(--border); text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
@@ -295,6 +333,10 @@
       .output-stack { grid-template-columns: 1fr; }
       .proof-strip { grid-template-columns: repeat(2, 1fr); }
       .conclusion { padding: 36px 26px; }
+      .zoom-dialog { width: 100vw; height: 100vh; border: 0; border-radius: 0; }
+      .zoom-title span { display: none; }
+      .zoom-canvas { height: calc(100vh - 64px); }
+      .zoom-content { padding: 28px; }
     }
     @media (max-width: 480px) {
       h1 { font-size: 41px; }
@@ -304,7 +346,7 @@
       :root { --bg: #fff; --surface: #fff; --surface-2: #f7f7f7; --text: #111; --muted: #4f4f4f; --border: #d8d8d8; --ink: #173e34; }
       body { background: #fff; font-size: 10pt; }
       .layout { display: block; }
-      .sidebar, .topbar, .back-top, .mobile-overlay { display: none !important; }
+      .sidebar, .topbar, .back-top, .mobile-overlay, .zoom-dialog, .diagram-hint { display: none !important; }
       main { max-width: none; padding: 0; }
       section { margin: 0 0 34px; break-inside: avoid; }
       .hero { min-height: 0; padding: 38px; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -416,7 +458,11 @@
             <div><p class="eyebrow">High-level workflow</p><h2>Gated from brief to export</h2></div>
             <p>Each stage must complete before the next begins. Failures return to the earliest affected stage; QA-approved content alone can be exported.</p>
           </div>
-          <div class="diagram" aria-label="Playbook workflow diagram">
+          <div class="diagram" id="workflowDiagram" role="button" tabindex="0" aria-label="Playbook workflow diagram. Click to open an enlarged view." aria-haspopup="dialog">
+            <span class="diagram-hint" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 15.5 5 5M10.5 7.5v6m-3-3h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              Click to enlarge
+            </span>
             <pre class="mermaid">
 flowchart LR
   A[Campaign Brief] --> B[Input Validation]
@@ -655,6 +701,31 @@ flowchart LR
     </div>
   </div>
 
+  <dialog class="zoom-dialog" id="diagramZoom" aria-labelledby="diagramZoomTitle">
+    <div class="zoom-header">
+      <div class="zoom-title">
+        <strong id="diagramZoomTitle">Gated from brief to export</strong>
+        <span>Scroll to pan · Use the controls to change scale · Esc to close</span>
+      </div>
+      <div class="zoom-actions" aria-label="Diagram zoom controls">
+        <button class="zoom-button" id="zoomOut" type="button" aria-label="Zoom out" title="Zoom out">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 10.5h6m2 5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <span class="zoom-level" id="zoomLevel" aria-live="polite">100%</span>
+        <button class="zoom-button" id="zoomIn" type="button" aria-label="Zoom in" title="Zoom in">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 10.5h6m-3-3v6m5 2 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button class="zoom-button" id="zoomReset" type="button" aria-label="Reset zoom" title="Reset zoom">1:1</button>
+        <button class="zoom-button" id="zoomClose" type="button" aria-label="Close enlarged diagram" title="Close">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="zoom-canvas" id="zoomCanvas">
+      <div class="zoom-content" id="zoomContent"></div>
+    </div>
+  </dialog>
+
   <button class="back-top" id="backTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none"><path d="m6 14 6-6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
@@ -712,6 +783,63 @@ flowchart LR
       const backTop = document.getElementById('backTop');
       window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 700), { passive: true });
       backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const workflowDiagram = document.getElementById('workflowDiagram');
+      const diagramZoom = document.getElementById('diagramZoom');
+      const zoomContent = document.getElementById('zoomContent');
+      const zoomCanvas = document.getElementById('zoomCanvas');
+      const zoomLevel = document.getElementById('zoomLevel');
+      let diagramScale = 1;
+      let diagramBaseWidth = 1400;
+
+      function applyDiagramZoom() {
+        const svg = zoomContent.querySelector('svg');
+        if (!svg) return;
+        svg.style.width = `${Math.round(diagramBaseWidth * diagramScale)}px`;
+        zoomLevel.textContent = `${Math.round(diagramScale * 100)}%`;
+      }
+
+      function openDiagramZoom() {
+        const sourceSvg = workflowDiagram.querySelector('svg');
+        if (!sourceSvg) return;
+        const clone = sourceSvg.cloneNode(true);
+        clone.removeAttribute('style');
+        clone.setAttribute('aria-label', 'Enlarged playbook workflow diagram');
+        clone.setAttribute('role', 'img');
+        zoomContent.replaceChildren(clone);
+        const viewBoxWidth = clone.viewBox && clone.viewBox.baseVal ? clone.viewBox.baseVal.width : 0;
+        diagramBaseWidth = Math.max(1400, Math.round(viewBoxWidth || sourceSvg.getBoundingClientRect().width * 1.8));
+        diagramScale = 1;
+        applyDiagramZoom();
+        diagramZoom.showModal();
+        zoomCanvas.scrollTo({ left: 0, top: 0 });
+        document.getElementById('zoomClose').focus();
+      }
+
+      workflowDiagram.addEventListener('click', openDiagramZoom);
+      workflowDiagram.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openDiagramZoom();
+        }
+      });
+      document.getElementById('zoomIn').addEventListener('click', () => {
+        diagramScale = Math.min(2, +(diagramScale + .2).toFixed(1));
+        applyDiagramZoom();
+      });
+      document.getElementById('zoomOut').addEventListener('click', () => {
+        diagramScale = Math.max(.6, +(diagramScale - .2).toFixed(1));
+        applyDiagramZoom();
+      });
+      document.getElementById('zoomReset').addEventListener('click', () => {
+        diagramScale = 1;
+        applyDiagramZoom();
+        zoomCanvas.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+      });
+      document.getElementById('zoomClose').addEventListener('click', () => diagramZoom.close());
+      diagramZoom.addEventListener('click', event => {
+        if (event.target === diagramZoom) diagramZoom.close();
+      });
 
       mermaid.initialize({
         startOnLoad: true,
